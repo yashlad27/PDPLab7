@@ -1,4 +1,4 @@
-package bst;
+package test;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import betterbst.BSTImpl;
+import betterbst.NothingThereException;
+import bst.BST;
 
 import static org.junit.Assert.assertEquals;
 
