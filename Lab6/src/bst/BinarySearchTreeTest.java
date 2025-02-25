@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import betterbst.BSTImpl;
-import betterbst.NothingThereException;
-
 import static org.junit.Assert.assertEquals;
 
 
