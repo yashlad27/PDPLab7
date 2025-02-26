@@ -13,6 +13,10 @@ import betterbst.BSTImpl;
 import bst.BST;
 import bst.NothingThereException;
 
+/**
+ * Junit test class to check implementations of preorder, postorder and inorder traversals
+ * in a binary search tree.
+ */
 public class BetterBSTTest {
 
   private BST<Integer> tree;
@@ -87,13 +91,6 @@ public class BetterBSTTest {
     }
   }
 
-    /*
-                              10
-                   5                   15
-           1             7                      20
-                2     6      8               19
-    */
-
   @Test
   public void testPreorder() {
     buildTestTree();
@@ -124,31 +121,25 @@ public class BetterBSTTest {
     Assert.assertEquals(expectedList, actualList);
   }
 
-  // Test for a different consumer
   @Test
   public void testTraversalsWithSum() {
     buildTestTree();
 
-    // Calculate sum using preorder
     SumConsumer preorderSum = new SumConsumer();
     tree.preorder(preorderSum);
     Assert.assertEquals(93, preorderSum.getSum());
 
-    // Calculate sum using inorder
     SumConsumer inorderSum = new SumConsumer();
     tree.inorder(inorderSum);
     Assert.assertEquals(93, inorderSum.getSum());
 
-    // Calculate sum using postorder
     SumConsumer postorderSum = new SumConsumer();
     tree.postorder(postorderSum);
     Assert.assertEquals(93, postorderSum.getSum());
   }
 
-  // Test balance functionality
   @Test
   public void testBalancedTree() {
-    // A balanced tree
     tree.insert(10);
     tree.insert(5);
     tree.insert(15);
@@ -162,7 +153,6 @@ public class BetterBSTTest {
 
   @Test
   public void testUnbalancedTree() {
-    // An unbalanced tree (right-heavy)
     tree.insert(10);
     tree.insert(15);
     tree.insert(20);
@@ -172,7 +162,6 @@ public class BetterBSTTest {
     Assert.assertFalse(((BSTImpl<Integer>) tree).isBalanced());
   }
 
-  // Test iterative traversals
   @Test
   public void testIterativePreorder() {
     buildTestTree();
@@ -213,15 +202,7 @@ public class BetterBSTTest {
     Assert.assertEquals(expectedList, actualList);
   }
 
-  // Helper methods
 
-  /**
-   * Builds a test tree with the structure:
-   * 10
-   * 5                   15
-   * 1             7                      20
-   * 2     6      8               19
-   */
   private void buildTestTree() {
     tree = new BSTImpl<>();
     tree.insert(10);
@@ -237,7 +218,7 @@ public class BetterBSTTest {
   }
 
   /**
-   * Consumer implementation that sums values
+   * Consumer implementation that sums values.
    */
   private static class SumConsumer implements Consumer<Integer> {
     private int sum = 0;
