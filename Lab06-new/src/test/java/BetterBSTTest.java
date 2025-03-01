@@ -1,5 +1,3 @@
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +11,10 @@ import java.util.function.Consumer;
 import betterbst.BSTImpl;
 import bst.BST;
 import bst.NothingThereException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Junit test class to check implementations of preorder, postorder and inorder traversals
@@ -46,7 +48,7 @@ public class BetterBSTTest {
     String output = sb.toString();
     output = "[" + output.substring(0, output.length() - 1) + "]";
 
-    Assert.assertEquals(output, tree.toString());
+    assertEquals(output, tree.toString());
   }
 
   @Test
@@ -61,8 +63,8 @@ public class BetterBSTTest {
       tree.insert(e);
     }
 
-    Assert.assertEquals(expected.first(), tree.minimum());
-    Assert.assertEquals(expected.last(), tree.maximum());
+    assertEquals(expected.first(), tree.minimum());
+    assertEquals(expected.last(), tree.maximum());
   }
 
   @Test(expected = NothingThereException.class)
@@ -88,7 +90,7 @@ public class BetterBSTTest {
     }
 
     for (int i = -1000; i <= 1000; i++) {
-      Assert.assertEquals(expected.contains(i), tree.present(i));
+      assertEquals(expected.contains(i), tree.present(i));
     }
   }
 
@@ -99,7 +101,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     tree.preorder(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -109,7 +111,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     tree.inorder(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -119,7 +121,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     tree.postorder(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -128,15 +130,15 @@ public class BetterBSTTest {
 
     SumConsumer preorderSum = new SumConsumer();
     tree.preorder(preorderSum);
-    Assert.assertEquals(93, preorderSum.getSum());
+    assertEquals(93, preorderSum.getSum());
 
     SumConsumer inorderSum = new SumConsumer();
     tree.inorder(inorderSum);
-    Assert.assertEquals(93, inorderSum.getSum());
+    assertEquals(93, inorderSum.getSum());
 
     SumConsumer postorderSum = new SumConsumer();
     tree.postorder(postorderSum);
-    Assert.assertEquals(93, postorderSum.getSum());
+    assertEquals(93, postorderSum.getSum());
   }
 
   @Test
@@ -149,7 +151,7 @@ public class BetterBSTTest {
     tree.insert(12);
     tree.insert(17);
 
-    Assert.assertTrue(((BSTImpl<Integer>) tree).isBalanced());
+    assertTrue(((BSTImpl<Integer>) tree).isBalanced());
   }
 
   @Test
@@ -160,7 +162,7 @@ public class BetterBSTTest {
     tree.insert(25);
     tree.insert(30);
 
-    Assert.assertFalse(((BSTImpl<Integer>) tree).isBalanced());
+    assertFalse(((BSTImpl<Integer>) tree).isBalanced());
   }
 
   @Test
@@ -170,7 +172,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     ((BSTImpl<Integer>) tree).preorderIterative(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -180,7 +182,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     ((BSTImpl<Integer>) tree).preorderIterative2(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -190,7 +192,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     ((BSTImpl<Integer>) tree).inorderIterative(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
   @Test
@@ -200,7 +202,7 @@ public class BetterBSTTest {
     List<Integer> actualList = new ArrayList<>();
 
     ((BSTImpl<Integer>) tree).postorderIterative(actualList::add);
-    Assert.assertEquals(expectedList, actualList);
+    assertEquals(expectedList, actualList);
   }
 
 
