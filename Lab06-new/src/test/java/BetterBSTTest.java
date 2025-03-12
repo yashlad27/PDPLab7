@@ -235,4 +235,56 @@ public class BetterBSTTest {
       return sum;
     }
   }
+
+  @Test
+  public void testEmptyTreeIsBalanced() {
+    BST<Integer> emptyTree = new BSTImpl<>();
+    assertTrue(((BSTImpl<Integer>) emptyTree).isBalanced());
+  }
+
+  @Test
+  public void testSingleNodeIsBalanced() {
+    BST<Integer> singleNodeTree = new BSTImpl<>();
+    singleNodeTree.insert(5);
+    assertTrue(((BSTImpl<Integer>) singleNodeTree).isBalanced());
+  }
+
+  @Test
+  public void testBoundaryBalanceCases() {
+    // Create a tree where the difference between left and right subtree heights is exactly 1
+    BST<Integer> boundaryTree = new BSTImpl<>();
+    boundaryTree.insert(10);
+    boundaryTree.insert(5);
+    boundaryTree.insert(15);
+    boundaryTree.insert(3);
+    // This should still be balanced
+    assertTrue(((BSTImpl<Integer>) boundaryTree).isBalanced());
+  }
+
+  @Test
+  public void testTraversalOnEmptyTree() {
+    BST<Integer> emptyTree = new BSTImpl<>();
+    List<Integer> result = new ArrayList<>();
+
+    // These should work without exceptions and result in an empty list
+    emptyTree.preorder(result::add);
+    emptyTree.inorder(result::add);
+    emptyTree.postorder(result::add);
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
+  public void testNullConsumerHandling() {
+    // This tests if your code handles null consumers appropriately
+    // You may want to decide whether to throw an exception or silently ignore
+    tree.insert(5);
+    try {
+      tree.preorder(null);
+      // If you choose to silently ignore null consumers, add an assertion here
+    } catch (NullPointerException e) {
+      // If you choose to throw an exception, this catch block confirms expected behavior
+      assertTrue(true);
+    }
+  }
 }
