@@ -20,8 +20,8 @@ public class AlaCartePizza implements ObservablePizza {
   /**
    * Create a pizza given its crust type, size and toppings.
    */
-  public AlaCartePizza(Size size, Crust crush) {
-    this.crust = crust;
+  public AlaCartePizza(Size size, Crust crust) {
+    this.crust = this.crust;
     this.size = size;
     this.toppings = new HashMap<ToppingName, ToppingPortion>();
   }
@@ -41,6 +41,48 @@ public class AlaCartePizza implements ObservablePizza {
     this.size = size;
     this.crust = crust;
     this.toppings = new HashMap<>(toppings);
+  }
+
+  public static class AlaCartePizzaBuilder extends PizzaBuilder {
+
+    private Size size;
+    private Crust crust;
+    private Map<ToppingName, ToppingPortion> toppings;
+
+    /**
+     * Create a new AlacartePizzaBuilder.
+     */
+    public AlaCartePizzaBuilder() {
+      this.toppings = new HashMap<>();
+    }
+
+    @Override
+    public AlaCartePizzaBuilder crust(Crust crust) {
+      this.crust = crust;
+      return this;
+    }
+
+    @Override
+    public AlaCartePizzaBuilder size(Size size) {
+      this.size = size;
+      return this;
+    }
+
+    /**
+     * Add a topping to the Pizza.
+     */
+    public AlaCartePizzaBuilder addTopping(ToppingName name, ToppingPortion portion) {
+      this.toppings.put(name, portion);
+      return this;
+    }
+
+    @Override
+    public ObservablePizza build() {
+      if (size == null) {
+        throw new IllegalStateException("Size must be specified");
+      }
+      return new AlaCartePizza(size, crust != null ? crust : Crust.Classic, toppings);
+    }
   }
 
   /**
