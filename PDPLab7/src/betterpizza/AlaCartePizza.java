@@ -20,8 +20,8 @@ public class AlaCartePizza implements ObservablePizza {
   /**
    * Create a pizza given its crust type, size and toppings.
    */
-  public AlaCartePizza(Size size, Crust crush) {
-    this.crust = crust;
+  public AlaCartePizza(Size size, Crust crust) {
+    this.crust = this.crust;
     this.size = size;
     this.toppings = new HashMap<ToppingName, ToppingPortion>();
   }
@@ -57,13 +57,13 @@ public class AlaCartePizza implements ObservablePizza {
     }
 
     @Override
-    public PizzaBuilder crust(Crust crust) {
+    public AlaCartePizzaBuilder crust(Crust crust) {
       this.crust = crust;
       return this;
     }
 
     @Override
-    public PizzaBuilder size(Size size) {
+    public AlaCartePizzaBuilder size(Size size) {
       this.size = size;
       return this;
     }
@@ -71,7 +71,7 @@ public class AlaCartePizza implements ObservablePizza {
     /**
      * Add a topping to the Pizza.
      */
-    private AlaCartePizzaBuilder addTopping(ToppingName name, ToppingPortion portion) {
+    public AlaCartePizzaBuilder addTopping(ToppingName name, ToppingPortion portion) {
       this.toppings.put(name, portion);
       return this;
     }
