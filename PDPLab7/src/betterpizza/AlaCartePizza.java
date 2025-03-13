@@ -27,6 +27,23 @@ public class AlaCartePizza implements ObservablePizza {
   }
 
   /**
+   * Protected constructor that takes in the size, crust and map of toppings.
+   *
+   * @param size     size of this pizza
+   * @param crust    crust of this pizza
+   * @param toppings toppings on this pizza
+   * @throws IllegalArgumentException if any of the parameters are null.
+   */
+  protected AlaCartePizza(Size size, Crust crust, Map<ToppingName, ToppingPortion> toppings) {
+    if (size == null || crust == null || toppings == null) {
+      throw new IllegalArgumentException("Parameters cannot be null");
+    }
+    this.size = size;
+    this.crust = crust;
+    this.toppings = new HashMap<>(toppings);
+  }
+
+  /**
    * Get the cost of this pizza.
    *
    * @return the cost of this pizza.
@@ -34,7 +51,7 @@ public class AlaCartePizza implements ObservablePizza {
   @Override
   public double cost() {
     double cost = 0.0;
-    for(Map.Entry<ToppingName, ToppingPortion> item : this.toppings.entrySet()) {
+    for (Map.Entry<ToppingName, ToppingPortion> item : this.toppings.entrySet()) {
       cost += item.getKey().getCost() * item.getValue().getCostMultiplier();
     }
     return cost + this.size.getBaseCost();
@@ -48,6 +65,6 @@ public class AlaCartePizza implements ObservablePizza {
    */
   @Override
   public ToppingPortion hasTopping(ToppingName name) {
-    return this.toppings.getDefault(name, null);
+    return this.toppings.getOrDefault(name, null);
   }
 }
