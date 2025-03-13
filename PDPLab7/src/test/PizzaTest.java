@@ -1,7 +1,9 @@
 import org.junit.Test;
 
 import betterpizza.AlaCartePizza;
+import betterpizza.CheesePizza;
 import betterpizza.ObservablePizza;
+import betterpizza.VeggiePizza;
 import pizza.Crust;
 import pizza.Pizza;
 import pizza.Size;
@@ -60,5 +62,41 @@ public class PizzaTest {
     assertEquals(ToppingPortion.LeftHalf, alacarte.hasTopping(ToppingName.Jalapeno));
   }
 
+  @Test
+  public void testPizzaBuilders() {
+    ObservablePizza alacarte = new AlaCartePizza.AlaCartePizzaBuilder()
+            .crust(Crust.Classic)
+            .size(Size.Medium)
+            .addTopping(ToppingName.Cheese, ToppingPortion.Full)
+            .addTopping(ToppingName.Sauce, ToppingPortion.Full)
+            .addTopping(ToppingName.GreenPepper, ToppingPortion.Full)
+            .addTopping(ToppingName.Onion, ToppingPortion.Full)
+            .addTopping(ToppingName.Jalapeno, ToppingPortion.LeftHalf)
+            .build();
+
+    // Create a cheese pizza
+    ObservablePizza cheese = new CheesePizza.CheesePizzaBuilder()
+            .crust(Crust.Thin)
+            .size(Size.Large)
+            .build();
+
+    // Create a stuffed crust, medium cheese pizza
+    ObservablePizza stuffedCheese = new CheesePizza.CheesePizzaBuilder()
+            .crust(Crust.Stuffed)
+            .size(Size.Medium)
+            .build();
+
+    // Create a thin crust, large veggie pizza
+    ObservablePizza veggie = new VeggiePizza.VeggiePizzaBuilder()
+            .crust(Crust.Thin)
+            .size(Size.Large)
+            .build();
+
+    // Test costs
+    assertEquals(8.25, alacarte.cost(), 0.01);
+    assertEquals(9.0, cheese.cost(), 0.01);
+    assertEquals(7.0, stuffedCheese.cost(), 0.01);
+    assertEquals(11.5, veggie.cost(), 0.01);
+  }
 
 }
