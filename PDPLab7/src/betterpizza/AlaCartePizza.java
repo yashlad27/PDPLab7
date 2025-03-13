@@ -64,10 +64,13 @@ public class AlaCartePizza implements ObservablePizza {
 
     @Override
     public PizzaBuilder size(Size size) {
-      this.size=size;
+      this.size = size;
       return this;
     }
 
+    /**
+     * Add a topping to the Pizza.
+     */
     private AlaCartePizzaBuilder addTopping(ToppingName name, ToppingPortion portion) {
       this.toppings.put(name, portion);
       return this;
@@ -75,7 +78,7 @@ public class AlaCartePizza implements ObservablePizza {
 
     @Override
     public ObservablePizza build() {
-      if(size == null){
+      if (size == null) {
         throw new IllegalStateException("Size must be specified");
       }
       return new AlaCartePizza(size, crust != null ? crust : Crust.Classic, toppings);
