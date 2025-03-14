@@ -56,6 +56,4 @@ public class AlaCartePizza implements Pizza {
     return cost + this.size.getBaseCost();
   }
 
-
-
 }
