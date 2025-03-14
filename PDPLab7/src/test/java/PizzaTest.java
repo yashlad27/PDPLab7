@@ -20,31 +20,6 @@ public class PizzaTest {
   private Pizza cheese;
   private Pizza halfCheese;
 
-
-//  @Before
-//  public void setup() {
-//    alacarte = new AlaCartePizza(Size.Medium,Crust.Classic);
-//    alacarte.addTopping(ToppingName.Cheese, ToppingPortion.Full);
-//    alacarte.addTopping(ToppingName.Sauce,ToppingPortion.Full);
-//    alacarte.addTopping(ToppingName.GreenPepper,ToppingPortion.Full);
-//    alacarte.addTopping(ToppingName.Onion,ToppingPortion.Full);
-//    alacarte.addTopping(ToppingName.Jalapeno,ToppingPortion.LeftHalf);
-//
-//    cheese = new CheesePizza(Size.Large,Crust.Thin);
-//
-//    halfCheese = new CheesePizza(Size.Large,Crust.Thin);
-//    //put cheese only on left half
-//    halfCheese.addTopping(ToppingName.Cheese,ToppingPortion.LeftHalf);
-//  }
-
-//  @Test
-//  public void testCost() {
-//    assertEquals(8.25,alacarte.cost(),0.01);
-//    assertEquals(9,cheese.cost(),0.01);
-//    assertEquals(8.5,halfCheese.cost(),0.01);
-//
-//  }
-
   @Test
   public void testAlaCartePizzaBuilder() {
     ObservablePizza alacarte = new AlaCartePizza.AlaCartePizzaBuilder()
@@ -74,29 +49,52 @@ public class PizzaTest {
             .addTopping(ToppingName.Jalapeno, ToppingPortion.LeftHalf)
             .build();
 
-    // Create a cheese pizza
     ObservablePizza cheese = new CheesePizza.CheesePizzaBuilder()
             .crust(Crust.Thin)
             .size(Size.Large)
             .build();
 
-    // Create a stuffed crust, medium cheese pizza
     ObservablePizza stuffedCheese = new CheesePizza.CheesePizzaBuilder()
             .crust(Crust.Stuffed)
             .size(Size.Medium)
             .build();
 
-    // Create a thin crust, large veggie pizza
     ObservablePizza veggie = new VeggiePizza.VeggiePizzaBuilder()
             .crust(Crust.Thin)
             .size(Size.Large)
             .build();
 
-    // Test costs
     assertEquals(8.25, alacarte.cost(), 0.01);
     assertEquals(9.0, cheese.cost(), 0.01);
     assertEquals(7.0, stuffedCheese.cost(), 0.01);
-    assertEquals(11.0, veggie.cost(), 0.01);
+    assertEquals(11.5, veggie.cost(), 0.01);
+  }
+
+  @Test
+  public void testLeftHalfCheese() {
+    ObservablePizza leftHalfCheese = new CheesePizza.CheesePizzaBuilder()
+            .crust(Crust.Thin)
+            .size(Size.Large)
+            .leftHalfCheese()
+            .build();
+
+    assertEquals(ToppingPortion.LeftHalf, leftHalfCheese.hasTopping(ToppingName.Cheese));
+    assertEquals(8.5, leftHalfCheese.cost(), 0.01);
+  }
+
+  @Test
+  public void testCustomizedVeggiePizza() {
+    ObservablePizza customVeggie = new VeggiePizza.VeggiePizzaBuilder()
+            .crust(Crust.Thin)
+            .size(Size.Large)
+            .noTomato()
+            .noJalapeno()
+            .build();
+
+    assertEquals(null, customVeggie.hasTopping(ToppingName.Tomato));
+    assertEquals(null, customVeggie.hasTopping(ToppingName.Jalapeno));
+    assertEquals(ToppingPortion.Full, customVeggie.hasTopping(ToppingName.BlackOlive));
+    assertEquals(10.5, customVeggie.cost(), 0.01);
   }
 
 }
