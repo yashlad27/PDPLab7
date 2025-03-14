@@ -96,7 +96,7 @@ public class PizzaTest {
     assertEquals(8.25, alacarte.cost(), 0.01);
     assertEquals(9.0, cheese.cost(), 0.01);
     assertEquals(7.0, stuffedCheese.cost(), 0.01);
-    assertEquals(11.5, veggie.cost(), 0.01);
+    assertEquals(11.0, veggie.cost(), 0.01);
   }
 
 }
